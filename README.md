@@ -1,29 +1,29 @@
 # Salesforce Developer Assignment – PagerDuty
 
-## 👤 Test User
+## Test User
 
 A test user was created with the email: `bae@pagerduty.com`.  
 (If the username was already in use, a number was appended.)
 
 ---
 
-## 🧩 Part 1 – Apex Trigger: Associate Contact to Account by Email Domain
+## Part 1 – Apex Trigger: Associate Contact to Account by Email Domain
 
-### 🎯 Objective:
-Automatically associate a newly created Contact with an existing Account based on the domain of the Contact’s email address.  
+### Objective:
+Automatically associate a newly created Contact with an existing Account based on the domain of the Contact’s email address.
 For example, a Contact with email `steve@blast.com` should be linked to an Account whose website is `https://www.blast.com`.
 
-### ⚙️ How It Works:
+### How It Works:
 - A `before insert` and `before update` trigger runs when a Contact is created or modified.
 - If the Contact has no `AccountId`, the domain is extracted from the email.
 - The system searches for Accounts whose `Website` contains that domain (after cleaning prefixes like `http`, `https`, `www`).
 - If a match is found (even with variants like `.com.au`, `.com.ca`, etc.), the Account is assigned to the Contact.
 
-### 📌 Key Considerations:
+### Key Considerations:
 - The domain match is implemented as a *fuzzy match* (substring comparison).
 - TLD flexibility is supported to account for international variations (e.g., `.com.au`, `.com.co`).
 
-### 🧪 Test Class:
+### Test Class:
 A test class is included that:
 - Creates an Account with a sample website.
 - Creates a Contact with a matching email domain.
@@ -31,12 +31,12 @@ A test class is included that:
 
 ---
 
-## ⚡ Part 2 – Lightning Web Component (LWC): Contact Search by Domain
+## Part 2 – Lightning Web Component (LWC): Contact Search by Domain
 
-### 🎯 Objective:
+### Objective:
 Allow users to search for Contacts from the Home Page using a company website or domain.
 
-### 📦 Components:
+### Components:
 
 #### **Apex Controller – `ContactSearchController.cls`**
 - Exposes a method `searchContactsByWebsite`.
@@ -51,7 +51,7 @@ Allow users to search for Contacts from the Home Page using a company website or
   - Title
   - Created Date
 
-### 🗂️ Files:
+### Files:
 
 | File                        | Description                               |
 |----------------------------|-------------------------------------------|
@@ -61,7 +61,7 @@ Allow users to search for Contacts from the Home Page using a company website or
 
 ---
 
-## ✅ How to Test
+## How to Test
 
 ### Part 1:
 1. Create an Account with a website like `https://www.blast.com`.
