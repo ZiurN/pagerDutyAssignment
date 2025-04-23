@@ -1,4 +1,5 @@
 import { LightningElement, track } from "lwc";
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import searchContactsByWebsite from "@salesforce/apex/ContactSearchController.searchContactsByWebsite";
 
 const COLUMNS = [
@@ -18,7 +19,17 @@ export default class ContactSearch extends LightningElement {
   handleSearch() {
     searchContactsByWebsite({ websiteInput: this.website })
       .then((result) => {
-        this.contacts = result;
+        if (result.length == 0) {
+          const evt = new ShowToastEvent({
+            title: 'Info',
+            message: 'No Contacts found',
+            variant: 'info',
+            mode: 'dismissable'})
+          this.dispatchEvent(evt)
+        } else {
+          this.contacts = result;
+        }
+
       })
       .catch((error) => {
         console.error(error);

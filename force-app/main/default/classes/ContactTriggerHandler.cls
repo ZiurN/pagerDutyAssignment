@@ -2,7 +2,7 @@ public class ContactTriggerHandler {
     public static void assignAccountsByEmailDomain(List<Contact> contacts) {
         Set<String> emailDomains = new Set<String>();
         for (Contact con : contacts) {
-            if (con.Email != null && con.Email.contains('@')) {
+            if (String.isNotBlank(con.Email) && con?.Email.contains('@')) {
                 String domain = con.Email.split('@')[1].toLowerCase();
                 emailDomains.add(domain);
             }
@@ -23,8 +23,8 @@ public class ContactTriggerHandler {
             }
         }
         for (Contact con : contacts) {
-            if ((con.AccountId == null || con.AccountId == '') && con.Email != null && con.Email.contains('@')) {
-                String domain = con.Email.split('@')[1].toLowerCase();
+            if (String.isNotBlank(con.Email) && con?.Email.contains('@')) {
+                String domain = con?.Email.split('@')[1].toLowerCase();
                 if (domainToAccountId.containsKey(domain)) {
                     con.AccountId = domainToAccountId.get(domain);
                 }
